@@ -41,5 +41,5 @@ func main() {
 	if err := r.Run(cfg.HTTPAddr); err != nil {
 		log.Fatalf("HTTP server error: %v", err)
 	}
-	log.Printf("server shutdown")
+	log.Printf("server shutdown!")
 }

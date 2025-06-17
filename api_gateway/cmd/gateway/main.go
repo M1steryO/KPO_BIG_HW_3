@@ -18,7 +18,7 @@ import (
 func main() {
 	cfg, err := config.MustLoad()
 	if err != nil {
-		log.Fatalf("config load failed: %internal", err)
+		log.Fatalf("config load failed: %v", err)
 	}
 
 	r := gatewayHttp.NewGatewayRouter(cfg)
@@ -29,4 +29,5 @@ func main() {
 	if err := r.Run(cfg.GatewayAddr); err != nil {
 		log.Fatalf("gateway server error: %v", err)
 	}
+	log.Printf("server shutdown!")
 }

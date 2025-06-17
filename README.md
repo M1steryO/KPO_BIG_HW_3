@@ -26,13 +26,14 @@ git clone https://github.com/your_username/kpo_big_hw_3.git
 cd kpo_big_hw_3
 ```
 
-### 3. Запускаете через Docker Compose
+### 3. Запускаете через docker-compose
 ```bash
 docker compose up --build
 ```
 
 
-### 4. После запуска спецификация API будет доступна по адресу:
+### 4. После запуска спецификация API
+будет доступна по адресу:
 ```bash
 http://localhost:8083/swagger/index.html
 ```

@@ -50,5 +50,5 @@ func main() {
 	if err := router.Run(cfg.HTTPAddr); err != nil {
 		log.Fatalf("server error: %v", err)
 	}
-	log.Printf("server shutdown")
+	log.Printf("server shutdown!")
 }
