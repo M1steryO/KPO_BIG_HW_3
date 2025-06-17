@@ -1,0 +1,134 @@
+basePath: /
+definitions:
+  handlers.DepositRequest:
+    properties:
+      amount:
+        description: |-
+          Amount — сумма пополнения
+          example: 50.5
+        example: 50.5
+        type: number
+    type: object
+  handlers.OrderCreateRequest:
+    properties:
+      amount:
+        description: |-
+          Amount — сумма заказа
+          example: 123.45
+        example: 123.45
+        type: number
+      user_id:
+        description: |-
+          UserID — идентификатор пользователя
+          example: 42
+        example: 42
+        type: integer
+    type: object
+host: localhost:8083
+info:
+  contact: {}
+  description: API Gateway for Orders and Payments Services
+  title: API Gateway
+  version: "1.0"
+paths:
+  /accounts/{user_id}:
+    post:
+      description: Proxy to Payment Service to create a new account
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: Create a new account
+      tags:
+      - accounts
+  /accounts/{user_id}/balance:
+    get:
+      description: Proxy to Payment Service to retrieve the balance of a user's account
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: Get account balance
+      tags:
+      - accounts
+  /accounts/{user_id}/deposit:
+    post:
+      consumes:
+      - application/json
+      description: Proxy to Payment Service to deposit funds into a user's account
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: integer
+      - description: Amount to deposit
+        in: body
+        name: amount
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.DepositRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Deposit to account
+      tags:
+      - accounts
+  /orders:
+    get:
+      description: Proxy to Order Service to list all orders of a given user
+      parameters:
+      - description: User ID
+        in: query
+        name: user_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: List orders for a user
+      tags:
+      - orders
+    post:
+      consumes:
+      - application/json
+      description: Proxy to Order Service to create a new order
+      parameters:
+      - description: Order payload
+        in: body
+        name: order
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.OrderCreateRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Create a new order
+      tags:
+      - orders
+  /orders/{id}:
+    get:
+      description: Proxy to Order Service to fetch an order by ID
+      parameters:
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: Get order by ID
+      tags:
+      - orders
+swagger: "2.0"

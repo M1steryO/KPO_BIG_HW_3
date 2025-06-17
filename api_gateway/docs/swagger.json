@@ -1,0 +1,187 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API Gateway for Orders and Payments Services",
+        "title": "API Gateway",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8083",
+    "basePath": "/",
+    "paths": {
+        "/accounts/{user_id}": {
+            "post": {
+                "description": "Proxy to Payment Service to create a new account",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Create a new account",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/accounts/{user_id}/balance": {
+            "get": {
+                "description": "Proxy to Payment Service to retrieve the balance of a user's account",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Get account balance",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/accounts/{user_id}/deposit": {
+            "post": {
+                "description": "Proxy to Payment Service to deposit funds into a user's account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "accounts"
+                ],
+                "summary": "Deposit to account",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Amount to deposit",
+                        "name": "amount",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.DepositRequest"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/orders": {
+            "get": {
+                "description": "Proxy to Order Service to list all orders of a given user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "orders"
+                ],
+                "summary": "List orders for a user",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "description": "Proxy to Order Service to create a new order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "orders"
+                ],
+                "summary": "Create a new order",
+                "parameters": [
+                    {
+                        "description": "Order payload",
+                        "name": "order",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.OrderCreateRequest"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/orders/{id}": {
+            "get": {
+                "description": "Proxy to Order Service to fetch an order by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "orders"
+                ],
+                "summary": "Get order by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Order ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "handlers.DepositRequest": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "description": "Amount — сумма пополнения\nexample: 50.5",
+                    "type": "number",
+                    "example": 50.5
+                }
+            }
+        },
+        "handlers.OrderCreateRequest": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "description": "Amount — сумма заказа\nexample: 123.45",
+                    "type": "number",
+                    "example": 123.45
+                },
+                "user_id": {
+                    "description": "UserID — идентификатор пользователя\nexample: 42",
+                    "type": "integer",
+                    "example": 42
+                }
+            }
+        }
+    }
+}
