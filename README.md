@@ -19,11 +19,11 @@
 ### 1. Клонируйте репозиторий
 
 ```bash
-git clone https://github.com/your_username/kpo_big_hw_3.git 
+git clone https://github.com/M1steryO/KPO_BIG_HW_3.git
 ```
 ### 2.  Переходите в папку проекта
 ```bash
-cd kpo_big_hw_3
+cd KPO_BIG_HW_3
 ```
 
 ### 3. Запускаете через docker-compose
