@@ -1336,3 +1336,9 @@ abstract.record*
 secring.*
 
 
+/.idea/
+.idea/
+**/.idea/
+*.iml
+out
+gen
